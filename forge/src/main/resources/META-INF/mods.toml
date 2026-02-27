@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "better_tab"
+version = "${version}"
+displayName = "Better Tab"
+authors = "ray"
+description = '''
+Improves tab(player list) and adds extra client-sided information, such as TPS and numerical ping. Now fully customizable!
+'''
+logoFile = "assets/better_tab/icon.png"
+
+[[dependencies.better_tab]]
+modId = "forge"
+mandatory = true
+versionRange = "[34,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.better_tab]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.better_tab]]
+modId = "cloth_config"
+type = "required"
+versionRange = "[1.0.0,)"
+ordering = "NONE"
+side = "CLIENT"
+mandatory = true

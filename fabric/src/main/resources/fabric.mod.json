@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "better_tab",
+  "version": "${version}",
+  "name": "Better Tab",
+  "description": "Improves tab(player list) and adds extra client-sided information, such as TPS and numerical ping. Now fully customizable!",
+  "authors": [
+    "ray"
+  ],
+  "license": "MIT",
+  "icon": "assets/better_tab/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.ray.bettertab.fabric.BetterTabFabric"
+    ],
+    "client": [
+      "net.ray.bettertab.fabric.client.BetterTabFabricClient"
+    ],
+    "modmenu": [
+      "net.ray.bettertab.fabric.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "better_tab.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": ">=1.20",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}

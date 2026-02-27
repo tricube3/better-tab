@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.ray.bettertab.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "TabMixin","TabTpsMixin","IconMixin"
+
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

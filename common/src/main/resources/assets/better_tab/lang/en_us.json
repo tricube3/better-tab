@@ -1,0 +1,52 @@
+{
+  "text.autoconfig.holo-items.title": "Holo Items Config",
+
+  "text.autoconfig.holo-items.option.enableNumericalPing": "Enable Numerical Ping",
+  "text.autoconfig.holo-items.option.enableNumericalPing.@Tooltip": "Enable numerical ping and disable the default ping icon.",
+
+  "text.autoconfig.holo-items.option.numericalFormat": "Numerical Ping Format",
+  "text.autoconfig.holo-items.option.numericalFormat.@Tooltip[0]": "Formatting for numerical ping,",
+  "text.autoconfig.holo-items.option.numericalFormat.@Tooltip[1]": "supporting the use of minecraft color codes (e.g. &a).",
+  "text.autoconfig.holo-items.option.numericalFormat.@Tooltip[2]": "Placeholders: {ping}.",
+
+  "text.autoconfig.holo-items.option.scale": "Ping Text Scale",
+  "text.autoconfig.holo-items.option.scale.@Tooltip": "Scale for numerical ping",
+
+  "text.autoconfig.holo-items.option.offset": "Name Area Offset",
+  "text.autoconfig.holo-items.option.offset.@Tooltip[0]": "Offset the player name area.",
+  "text.autoconfig.holo-items.option.offset.@Tooltip[1]": "Increase this if it is interfering with player names.",
+
+  "text.autoconfig.holo-items.option.enableInfo": "Enable Footer Info",
+  "text.autoconfig.holo-items.option.enableInfo.@Tooltip": "Enable extra footer information below tab.",
+
+  "text.autoconfig.holo-items.option.footerInfoFormat": "Footer Info Format",
+  "text.autoconfig.holo-items.option.footerInfoFormat.@Tooltip[0]": "Formatting for extra footer information.",
+  "text.autoconfig.holo-items.option.footerInfoFormat.@Tooltip[1]": "supporting the use of minecraft color codes (e.g. &a).",
+  "text.autoconfig.holo-items.option.footerInfoFormat.@Tooltip[2]": "Placeholders: {ping} {tps} {mspt} {fps}.",
+
+  "text.autoconfig.holo-items.option.tpsColor": "TPS Color Settings",
+  "text.autoconfig.holo-items.option.tpsColor.@Tooltip": "Set colors for {tps} thresholds. Uses minecraft color codes.",
+
+  "text.autoconfig.holo-items.option.tpsColor.above19": ">19 TPS",
+
+  "text.autoconfig.holo-items.option.tpsColor.above18": ">18 TPS",
+
+  "text.autoconfig.holo-items.option.tpsColor.above16": ">16 TPS",
+
+  "text.autoconfig.holo-items.option.tpsColor.above10": ">10 TPS",
+
+  "text.autoconfig.holo-items.option.tpsColor.below10": "≤10 TPS",
+
+  "text.autoconfig.holo-items.option.pingColor": "Ping Color Settings",
+  "text.autoconfig.holo-items.option.pingColor.@Tooltip": "Set colors for {ping} thresholds. Uses minecraft color codes.",
+
+  "text.autoconfig.holo-items.option.pingColor.below100": "<100ms",
+
+  "text.autoconfig.holo-items.option.pingColor.below200": "<200ms",
+
+  "text.autoconfig.holo-items.option.pingColor.below300": "<300ms",
+
+  "text.autoconfig.holo-items.option.pingColor.below500": "<500ms",
+
+  "text.autoconfig.holo-items.option.pingColor.above500": "≥500ms "
+}
