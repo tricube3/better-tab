@@ -10,7 +10,7 @@ public class TPSvalue {
     }
     private static double mspt = 0;
     public static void setCurrentMSPT(double t) {
-        mspt = t/2;//dividing it by 2 makes it accurate, no idea why
+        mspt = t/2;
     }
     public static double getCurrentMSPT() {return mspt;}
 }

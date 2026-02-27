@@ -29,8 +29,7 @@ side = "BOTH"
 
 [[dependencies.better_tab]]
 modId = "cloth_config"
-type = "required"
+mandatory = true
 versionRange = "[1.0.0,)"
 ordering = "NONE"
-side = "CLIENT"
-mandatory = true
+side = "BOTH"

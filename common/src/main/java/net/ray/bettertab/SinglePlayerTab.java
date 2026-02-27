@@ -3,6 +3,7 @@ package net.ray.bettertab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlayerTabOverlay;
+import net.minecraft.world.scores.DisplaySlot;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.Scoreboard;
 
@@ -15,7 +16,7 @@ public class SinglePlayerTab {
                 boolean tabPressed = mc.options.keyPlayerList.isDown();
                 if (tabPressed) {
                     Scoreboard scoreboard = mc.level.getScoreboard();
-                    Objective objective = scoreboard.getDisplayObjective(1);
+                    Objective objective = scoreboard.getDisplayObjective(DisplaySlot.LIST);
                     int screenWidth = mc.getWindow().getGuiScaledWidth();
                     tabList.setVisible(true);
                     tabList.render(guiGraphics, screenWidth, scoreboard, objective);

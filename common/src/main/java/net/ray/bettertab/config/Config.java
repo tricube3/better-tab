@@ -4,7 +4,7 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 
-@me.shedaniel.autoconfig.annotation.Config(name = "holo-items")
+@me.shedaniel.autoconfig.annotation.Config(name = "better-tab")
 public class Config implements ConfigData {
     @ConfigEntry.Gui.Tooltip() //Enable numerical ping and disable the default ping icon.
     public boolean enableNumericalPing = true;

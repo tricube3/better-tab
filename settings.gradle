@@ -11,4 +11,3 @@ rootProject.name = 'better_tab'
 
 include 'common'
 include 'fabric'
-include 'forge'

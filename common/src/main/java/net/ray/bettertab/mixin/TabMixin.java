@@ -126,7 +126,7 @@ public class TabMixin {
 
 		MutableComponent footerText;
 		if(this.footer != null){
-			footerText = (MutableComponent) this.footer;
+			footerText = this.footer.copy();
 			footerText.append("\n");
 		}
 
@@ -214,24 +214,19 @@ public class TabMixin {
 		graphics.pose().popPose();
 		ci.cancel();
 	}
-
-	@ModifyVariable(method = "render", at = @At(value = "INVOKE", target = "Ljava/util/List;size()I", ordinal = 0), ordinal = 0)
-	private int addPaddingToNameWidth(int j) {
-
-		if (ConfigGetter.config.enableNumericalPing) {
-			return j + ConfigGetter.config.offset;
-		}
-
-		return j;
-	}
-
-	@ModifyVariable(method = "render", at = @At(value = "INVOKE", target = "Ljava/util/List;size()I", ordinal = 0), ordinal = 1)
-	private int addPaddingToScoreWidth(int k) {
-
+	@ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
+	private int addPaddingToNameWidth(int k) {
 		if (ConfigGetter.config.enableNumericalPing) {
 			return k + ConfigGetter.config.offset;
 		}
-
 		return k;
+	}
+
+	@ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 1), ordinal = 2)
+	private int addPaddingToScoreWidth(int l) {
+		if (ConfigGetter.config.enableNumericalPing) {
+			return l + ConfigGetter.config.offset;
+		}
+		return l;
 	}
 }
