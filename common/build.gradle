@@ -3,7 +3,7 @@ architectury {
 }
 
 dependencies {
-    modApi "me.shedaniel.cloth:cloth-config-fabric:11.1.136"
+    modApi "me.shedaniel.cloth:cloth-config-fabric:16.0.143"
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
 
 }

@@ -21,7 +21,7 @@ public class BetterTabCommand {
                 .executes(context -> {
                     Minecraft client = Minecraft.getInstance();
                     if (client.level == null) return 0;
-                    client.tell(() -> {
+                    client.schedule(() -> {
                         try {
                             Supplier<Screen> screenSupplier = AutoConfig.getConfigScreen(
                                     Config.class,
