@@ -199,19 +199,19 @@ public class TabMixin {
 		int slotHeight = 8;
 		float drawY = (y + (slotHeight / 2)) - ((textHeight * scale) / 2);
 
-		graphics.pose().pushPose();
-		graphics.pose().translate(Math.round(drawX), Math.round(drawY), 100.0F);
-		graphics.pose().scale(scale, scale, 1.0F);
+		graphics.pose().pushMatrix();
+		graphics.pose().translate(Math.round(drawX), Math.round(drawY));
+		graphics.pose().scale(scale, scale);
 
 		graphics.drawString(
 				minecraft.font,
 				text,
 				0,
 				0,
-				0x00FFFFFF
+				0xFFFFFFFF
 		);
 
-		graphics.pose().popPose();
+		graphics.pose().popMatrix();
 		ci.cancel();
 	}
 	@ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
