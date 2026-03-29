@@ -1,9 +1,10 @@
 package net.ray.bettertab.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.PlayerTabOverlay;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.network.chat.Component;
@@ -66,11 +67,11 @@ public class TabMixin {
 	}
 	private MutableComponent originalText = null;
 	@Inject(
-			method = "render",
+			method = "extractRenderState",
 			at = @At("HEAD")
 	)
 	private void updateFooterEveryTick(
-			GuiGraphics graphics,
+			GuiGraphicsExtractor graphics,
 			int width,
 			Scoreboard scoreboard,
 			@Nullable Objective objective,
@@ -138,11 +139,11 @@ public class TabMixin {
 				.append(text);
 	}
 	@Inject(
-			method = "render",
+			method = "extractRenderState",
 			at = @At("TAIL") // inject at the end of render
 	)
 	private void removeLastFooterLine(
-			GuiGraphics graphics,
+			GuiGraphicsExtractor graphics,
 			  int width,
 			  Scoreboard scoreboard,
 			  @Nullable Objective objective,
@@ -150,12 +151,12 @@ public class TabMixin {
 		this.footer = originalText;
 	}
 	@Inject(
-			method = "renderPingIcon",
+			method = "extractPingIcon",
 			at = @At("HEAD"),
 			cancellable = true
 	)
 	public void renderPingIcon(
-			GuiGraphics graphics,
+			GuiGraphicsExtractor graphics,
 			int width,
 			int x,
 			int y,
@@ -203,7 +204,7 @@ public class TabMixin {
 		graphics.pose().translate(Math.round(drawX), Math.round(drawY));
 		graphics.pose().scale(scale, scale);
 
-		graphics.drawString(
+		graphics.text(
 				minecraft.font,
 				text,
 				0,
@@ -214,19 +215,17 @@ public class TabMixin {
 		graphics.pose().popMatrix();
 		ci.cancel();
 	}
-	@ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
-	private int addPaddingToNameWidth(int k) {
+	@Inject(method = "extractRenderState", at = @At(value = "RETURN"))
+	private void addPaddingNameWidth(CallbackInfo ci, @Local(ordinal = 0) LocalIntRef maxNameWidth) {
 		if (ConfigGetter.config.enableNumericalPing) {
-			return k + ConfigGetter.config.offset;
+			maxNameWidth.set(maxNameWidth.get() + ConfigGetter.config.offset);
 		}
-		return k;
 	}
 
-	@ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 1), ordinal = 2)
-	private int addPaddingToScoreWidth(int l) {
+	@Inject(method = "extractRenderState", at = @At(value = "RETURN"))
+	private void addPaddingScoreWidth(CallbackInfo ci, @Local(ordinal = 1) LocalIntRef maxScoreWidth) {
 		if (ConfigGetter.config.enableNumericalPing) {
-			return l + ConfigGetter.config.offset;
+			maxScoreWidth.set(maxScoreWidth.get() + ConfigGetter.config.offset);
 		}
-		return l;
 	}
 }

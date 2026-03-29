@@ -2,10 +2,8 @@ package net.ray.bettertab.mixin;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.components.PlayerTabOverlay;
 import net.minecraft.client.multiplayer.PlayerInfo;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.PlayerModelPart;
 import org.spongepowered.asm.mixin.Final;
@@ -20,7 +18,14 @@ import java.util.UUID;
 @Mixin(PlayerTabOverlay.class)
 public class IconMixin { //enable player icon rendering in offline mode servers
 
-    @ModifyVariable(method = "render", at = @At(value = "STORE"), ordinal = 0)
+    @ModifyVariable(
+            method = "extractRenderState",
+            at = @At(
+                    value = "STORE",
+                    ordinal = 0
+            ),
+            name = "showHead"
+    )
     private boolean forceBlToTrue(boolean bl) {
         return true;
     }

@@ -1,14 +1,14 @@
 package net.ray.bettertab;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.PlayerTabOverlay;
 import net.minecraft.world.scores.DisplaySlot;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.Scoreboard;
 
 public class SinglePlayerTab {
-    public static void renderTab(GuiGraphics guiGraphics){
+    public static void renderTab(GuiGraphicsExtractor guiGraphics){
         Minecraft mc = Minecraft.getInstance();
         if (mc.hasSingleplayerServer() && mc.player != null) {
             PlayerTabOverlay tabList = mc.gui.getTabList();
@@ -19,7 +19,7 @@ public class SinglePlayerTab {
                     Objective objective = scoreboard.getDisplayObjective(DisplaySlot.LIST);
                     int screenWidth = mc.getWindow().getGuiScaledWidth();
                     tabList.setVisible(true);
-                    tabList.render(guiGraphics, screenWidth, scoreboard, objective);
+                    tabList.extractRenderState(guiGraphics, screenWidth, scoreboard, objective);
                 } else {
                     tabList.setVisible(false);
                 }
