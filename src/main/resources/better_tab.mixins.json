@@ -8,7 +8,7 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "mixins": ["IconMixin","TabMixin","TabTpsMixin"],
-  "client": [
+  "mixins": [],
+  "client": ["IconMixin","TabMixin","TabTpsMixin"
   ]
 }
