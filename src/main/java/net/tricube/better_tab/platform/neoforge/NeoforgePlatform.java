@@ -1,10 +1,10 @@
-package net.ray.better_tab.platform.neoforge;
+package net.tricube.better_tab.platform.neoforge;
 
 //? neoforge {
 
-/*import net.ray.fast_access.platform.Platform;
-import net.neoforged.fml.ModList;
+/*import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
+import net.tricube.better_tab.platform.Platform;
 
 public class NeoforgePlatform implements Platform {
 

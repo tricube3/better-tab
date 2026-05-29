@@ -1,10 +1,10 @@
-package net.ray.better_tab.mixin;
+package net.tricube.better_tab.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundSetTimePacket;
 import net.minecraft.server.MinecraftServer;
-import net.ray.better_tab.TPSvalue;
+import net.tricube.better_tab.TPSvalue;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -41,7 +41,7 @@ public class TabTpsMixin {
 
     private void updateFromServer(MinecraftServer server) {
 		//~ if >=1.21 '.getAverageTickTime()' -> '.getCurrentSmoothedTickTime()'
-        float mspt = server.getAverageTickTime();
+        float mspt = server.getCurrentSmoothedTickTime();
         if (mspt > 0 && mspt < 1000) {
             serverMspt = mspt;
             float tps = 1000.0f / mspt;

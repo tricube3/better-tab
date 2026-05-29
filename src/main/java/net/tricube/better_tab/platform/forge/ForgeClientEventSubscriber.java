@@ -1,4 +1,4 @@
-package net.ray.better_tab.platform.forge;
+package net.tricube.better_tab.platform.forge;
 
 //? forge {
 
@@ -6,7 +6,8 @@ package net.ray.better_tab.platform.forge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.ray.better_tab.ModInit;
+import net.tricube.better_tab.ModInit;
+
 
 @Mod.EventBusSubscriber(modid = ModInit.MOD_ID, value = Dist.CLIENT)
 public class ForgeClientEventSubscriber {

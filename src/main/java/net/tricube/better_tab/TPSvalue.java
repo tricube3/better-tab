@@ -1,4 +1,4 @@
-package net.ray.better_tab;
+package net.tricube.better_tab;
 
 public class TPSvalue {
     private static double tps = 20.0;

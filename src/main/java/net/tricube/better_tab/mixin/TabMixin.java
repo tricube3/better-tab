@@ -1,4 +1,4 @@
-package net.ray.better_tab.mixin;
+package net.tricube.better_tab.mixin;
 
 import net.minecraft.client.Minecraft;
 //~ if >=26.1 '.GuiGraphics' -> '.GuiGraphicsExtractor'
@@ -10,8 +10,8 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.Scoreboard;
-import net.ray.better_tab.TPSvalue;
-import net.ray.better_tab.config.Config;
+import net.tricube.better_tab.TPSvalue;
+import net.tricube.better_tab.config.Config;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,10 +1,10 @@
-package net.ray.better_tab.platform.forge;
+package net.tricube.better_tab.platform.forge;
 
 //? forge {
 
-/*import net.ray.fast_access.platform.Platform;
-import net.minecraftforge.fml.ModList;
+/*import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
+import net.tricube.better_tab.platform.Platform;
 
 public class ForgePlatform implements Platform {
 

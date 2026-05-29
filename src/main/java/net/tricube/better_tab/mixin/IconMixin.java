@@ -1,4 +1,4 @@
-package net.ray.better_tab.mixin;
+package net.tricube.better_tab.mixin;
 
 import net.minecraft.client.gui.components.PlayerTabOverlay;
 import org.spongepowered.asm.mixin.Mixin;

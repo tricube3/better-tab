@@ -1,4 +1,4 @@
-package net.ray.better_tab.platform.fabric;
+package net.tricube.better_tab.platform.fabric;
 
 //? fabric {
 
@@ -9,7 +9,8 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 //?if >= 1.21.11
 //import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.minecraft.resources.ResourceLocation;
-import net.ray.better_tab.SinglePlayerTab;
+import net.tricube.better_tab.SinglePlayerTab;
+
 
 @Entrypoint("client")
 public class FabricClientEntrypoint implements ClientModInitializer {

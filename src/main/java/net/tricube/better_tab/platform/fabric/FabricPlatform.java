@@ -1,8 +1,8 @@
-package net.ray.fast_access.platform.fabric;
+package net.tricube.better_tab.platform.fabric;
 
 //? fabric {
 
-import net.ray.fast_access.platform.Platform;
+import net.tricube.better_tab.platform.Platform;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class FabricPlatform implements Platform {

@@ -1,13 +1,13 @@
-package net.ray.better_tab.config;
+package net.tricube.better_tab.config;
 
 import net.minecraft.network.chat.Component;
-import net.ray.CraftConfig.api.controller.*;
-import net.ray.CraftConfig.api.registry.CraftConfigRegistry;
-import net.ray.CraftConfig.api.v1.ConfigCategory;
-import net.ray.CraftConfig.api.v1.ConfigOption;
-import net.ray.CraftConfig.api.v1.ConfigSection;
-import net.ray.CraftConfig.api.v1.CraftConfig;
-import net.ray.better_tab.ModInit;
+import net.tricube.CraftConfig.api.controller.*;
+import net.tricube.CraftConfig.api.registry.CraftConfigRegistry;
+import net.tricube.CraftConfig.api.v1.ConfigCategory;
+import net.tricube.CraftConfig.api.v1.ConfigOption;
+import net.tricube.CraftConfig.api.v1.ConfigSection;
+import net.tricube.CraftConfig.api.v1.CraftConfig;
+import net.tricube.better_tab.ModInit;
 
 import java.awt.*;
 
