@@ -1,22 +1,22 @@
 mod.id = "better_tab"
 mod.name = "Better Tab"
-mod.group = "net.ray"
-mod.version = "2.1.3"
+mod.group = "net.tricube"
+mod.version = "2.1.4"
 mod.channel_tag = ""
 mod.description = "Improves tab(player list) and adds extra client-sided information, such as TPS and numerical ping. Now fully customizable!"
-mod.authors = ["ray"]
+mod.authors = ["tricube"]
 mod.contributors = []
 mod.inception_year = "2026"
 mod.license.name = "MIT"
 mod.license.url = "https://opensource.org/licenses/MIT"
 mod.license.dist = "repo"
-mod.sources_url = "https://github.com/ray22777/better-tab"
-mod.homepage_url = "https://github.com/ray22777/better-tab"
-mod.issues_url = "https://github.com/ray22777/better-tab/issues"
+			mod.sources_url = "https://github.com/tricube3/better-tab"
+mod.homepage_url = "https://github.com/tricube3/better-tab"
+mod.issues_url = "https://github.com/tricube3/better-tab/issues"
 mod.discord_url = ""
 [[mod.pom.developers]]
-id = "ray"
-name = "ray"
+id = "tricube"
+name = "tricube"
 url = "https://github.com/ghost"
 
 
