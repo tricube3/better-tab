@@ -14,6 +14,7 @@ public class SinglePlayerTab {
     public static void renderTab(GuiGraphics guiGraphics){
         Minecraft mc = Minecraft.getInstance();
         if (mc.hasSingleplayerServer() && mc.player != null) {
+			//~ if >=26.2 '.getTabList' -> '.hud.getTabList'
             PlayerTabOverlay tabList = mc.gui.getTabList();
             if (tabList != null) {
                 boolean tabPressed = mc.options.keyPlayerList.isDown();
