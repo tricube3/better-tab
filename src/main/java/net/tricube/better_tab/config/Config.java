@@ -14,9 +14,19 @@ import java.awt.*;
 @SuppressWarnings("unchecked")
 public class Config {
 
+	public static final ConfigOption<Integer> maxRows =
+			ConfigOption.intOption(Component.literal("Maximum Rows"), 20)
+					.description(Component.literal("Maximum Rows to display in tab"));
+
+	public static final ConfigOption<Integer> maxCols =
+			ConfigOption.intOption(Component.literal("Maximum Columns"), 2)
+					.description(Component.literal("Maximum Columns to display in tab"));
+
+	public static final ConfigOption<Boolean> enableIcon =
+			ConfigOption.booleanOption(Component.literal("Enable Player Icon"), true)
+					.description(Component.literal("Enable default vanilla player skin icon beside names."));
 
     public static final ConfigOption<Boolean> enableNumericalPing =
-
             ConfigOption.booleanOption(Component.literal("Enable Numerical Ping"), true)
                     .description(Component.literal("Enable numerical ping and disable the default ping icon"));
 
@@ -27,10 +37,6 @@ public class Config {
     public static final ConfigOption<Float> scale =
                 ConfigOption.floatOption(Component.literal("Ping Text Scale"), 0.7f)
                     .description(Component.literal("Scale for numerical ping"));
-
-    public static final ConfigOption<Integer> offset =
-            ConfigOption.intOption(Component.literal("Name Area Offset"), 2)
-                    .description(Component.literal("Offset the player name area. Increase this if it is interfering with player names."));
 
     public static final ConfigOption<Boolean> enableInfo =
             ConfigOption.booleanOption(Component.literal("Enable Footer Info"), true)
@@ -87,23 +93,23 @@ public class Config {
 
     public static final CraftConfig config = CraftConfig.create(ModInit.MOD_ID)
             .title(Component.literal("Better Tab Config"))
+			.category(ConfigCategory.builder(Component.literal("Tab Settings"))
+					.section(ConfigSection.builder(Component.literal("Tab"))
+							.option(enableIcon.controller(new BooleanController()))
+							.option(maxCols.controller(new SliderController<>(0, 10)))
+							.option(maxRows.controller(new SliderController<>(0, 100)))
 
-            .category(ConfigCategory.builder(Component.literal("Ping Settings"))
-                    .section(ConfigSection.builder(Component.literal("General"))
-                            .option(enableNumericalPing.controller(new BooleanController()))
-                            .option(numericalFormat.controller(new InputFieldController<>()))
-                            .option(scale.controller(new SliderController<>(0.1f, 2.0f)))
-                            .option(offset.controller(new SliderController<>(0, 20)))
-                            .build())
-                    .build())
-
-            .category(ConfigCategory.builder(Component.literal("Footer Info"))
-                    .section(ConfigSection.builder(Component.literal("General"))
-                            .option(enableInfo.controller(new BooleanController()))
-                            .option(footerInfoFormat.controller(new InputFieldController<>()))
-                            .build())
-                    .build())
-
+							.build())
+					.section(ConfigSection.builder(Component.literal("Ping"))
+							.option(enableNumericalPing.controller(new BooleanController()))
+							.option(numericalFormat.controller(new InputFieldController<>()))
+							.option(scale.controller(new SliderController<>(0.1f, 2.0f)))
+							.build())
+					.section(ConfigSection.builder(Component.literal("Footer"))
+							.option(enableInfo.controller(new BooleanController()))
+							.option(footerInfoFormat.controller(new InputFieldController<>()))
+							.build())
+					.build())
             .category(ConfigCategory.builder(Component.literal("TPS Color"))
                     .section(ConfigSection.builder(Component.literal("TPS Thresholds"))
                             .option(above19.controller(new ColorController()))

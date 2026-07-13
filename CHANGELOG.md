@@ -1,1 +1,1 @@
-added support for more versions
+26.2 support

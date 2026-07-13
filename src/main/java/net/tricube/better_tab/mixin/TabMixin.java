@@ -114,7 +114,7 @@ public class TabMixin {
 		String[] tokens = format.split("((?=\\{)|(?<=\\}))");
 
 		MutableComponent infoLine = Component.empty();
-		for (String token : tokens) {
+		for (String token : tokens) { //TODO: migrate to text placeholder api, add extra placeholders (player count, max players)
 			switch (token) {
 				case "{tps}" -> infoLine.append(tpsComponent);
 				case "{ping}" -> infoLine.append(pingComponent);
@@ -235,21 +235,21 @@ public class TabMixin {
 		ci.cancel();
 	}
 
-	//~ if >=26.1 'render' -> 'extractRenderState'
-	@ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
-	private int addPaddingToNameWidth(int k) {
-		if (Config.enableNumericalPing.get()) {
-			return k + Config.offset.get();
-		}
-		return k;
-	}
-
-	//~ if >=26.1 'render' -> 'extractRenderState'
-	@ModifyVariable(method = "render", at = @At(value = "STORE", ordinal = 1), ordinal = 2)
-	private int addPaddingToScoreWidth(int l) {
-		if (Config.enableNumericalPing.get()) {
-			return l + Config.offset.get();
-		}
-		return l;
-	}
+//	//~ if >=26.1 'render' -> 'extractRenderState'
+//	@ModifyVariable(method = "extractRenderState", at = @At(value = "STORE", ordinal = 0), ordinal = 1)
+//	private int addPaddingToNameWidth(int k) {
+//		if (Config.enableNumericalPing.get()) {
+//			return k + Config.offset.get();
+//		}
+//		return k;
+//	}
+//
+//	//~ if >=26.1 'render' -> 'extractRenderState'
+//	@ModifyVariable(method = "extractRenderState", at = @At(value = "STORE", ordinal = 1), ordinal = 2)
+//	private int addPaddingToScoreWidth(int l) {
+//		if (Config.enableNumericalPing.get()) {
+//			return l + Config.offset.get();
+//		}
+//		return l;
+//	}
 }

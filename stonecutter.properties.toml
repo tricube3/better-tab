@@ -1,7 +1,7 @@
 mod.id = "better_tab"
 mod.name = "Better Tab"
 mod.group = "net.tricube"
-mod.version = "2.1.4"
+mod.version = "2.2.0"
 mod.channel_tag = ""
 mod.description = "Improves tab(player list) and adds extra client-sided information, such as TPS and numerical ping. Now fully customizable!"
 mod.authors = ["tricube"]
