@@ -1,1 +1,1 @@
-26.2 support
+added a scroll function to tablist

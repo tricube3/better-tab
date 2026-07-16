@@ -18,6 +18,7 @@ public class ScrollInputMixin {
 		Minecraft mc = Minecraft.getInstance();
 
 		if (mc.options.keyPlayerList.isDown()) {
+
 			int total = TabScrollState.totalPlayers;
 			int cols = Config.maxCols.get();
 			int rows = Config.maxRows.get();
@@ -26,7 +27,7 @@ public class ScrollInputMixin {
 			int maxOffset = total <= visibleSlots
 					? 0
 					: ((total - 1) / visibleSlots) * visibleSlots;
-
+			if (total <= visibleSlots) return;
 			int step = yOffset > 0 ? -visibleSlots : visibleSlots;
 
 			TabScrollState.scrollOffset = Mth.clamp(

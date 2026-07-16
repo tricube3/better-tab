@@ -11,6 +11,7 @@
   ],
   "client": [
     "ScrollableTabMixin",
+    "ScrollInputMixin",
     "IconMixin",
     "TabMixin",
     "TabTpsMixin"

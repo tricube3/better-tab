@@ -43,7 +43,7 @@ legacyForge {
 			client()
 			gameDirectory = file("run/")
 			ideName = "Forge Client (${sc.current.version})"
-			programArgument("--username=Dev")
+			programArgument("--username=Ray_Dev27")
 		}
 		register("server") {
 			server()

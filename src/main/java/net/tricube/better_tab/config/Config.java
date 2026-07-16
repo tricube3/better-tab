@@ -44,7 +44,7 @@ public class Config {
 
     public static final ConfigOption<String> footerInfoFormat =
             ConfigOption.stringOption(Component.literal("Footer Info Format"), "&7TPS: {tps} &7PING: {ping}&7ms")
-                    .description(Component.literal("Formatting for extra footer information,\nsupporting the use of minecraft color codes\n(e.g. &a). Placeholders: {ping} {tps} {mspt} {fps}."));
+                    .description(Component.literal("Formatting for extra footer information,\nsupporting the use of minecraft color codes\n(e.g. &a). Placeholders: {ping} {tps} {mspt} {fps} {online}."));
 
     public static final ConfigOption<Color> above19 =
             ConfigOption.colorOption(Component.literal(">19 TPS"), new Color(0x55FF55))
@@ -98,7 +98,6 @@ public class Config {
 							.option(enableIcon.controller(new BooleanController()))
 							.option(maxCols.controller(new SliderController<>(0, 10)))
 							.option(maxRows.controller(new SliderController<>(0, 100)))
-
 							.build())
 					.section(ConfigSection.builder(Component.literal("Ping"))
 							.option(enableNumericalPing.controller(new BooleanController()))

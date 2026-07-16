@@ -114,12 +114,13 @@ public class TabMixin {
 		String[] tokens = format.split("((?=\\{)|(?<=\\}))");
 
 		MutableComponent infoLine = Component.empty();
-		for (String token : tokens) { //TODO: migrate to text placeholder api, add extra placeholders (player count, max players)
+		for (String token : tokens) { //TODO: migrate to text placeholder api in future
 			switch (token) {
 				case "{tps}" -> infoLine.append(tpsComponent);
 				case "{ping}" -> infoLine.append(pingComponent);
 				case "{mspt}" -> infoLine.append(msptComponent);
 				case "{fps}" -> infoLine.append(fpsComponent);
+				case "{online}" -> infoLine.append(Component.literal(String.valueOf(minecraft.getConnection() != null ? minecraft.getConnection().getListedOnlinePlayers().size() : 0)));
 				default -> infoLine.append(Component.literal(token.replace("&", "§")));
 			}
 		}
