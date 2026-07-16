@@ -4,27 +4,36 @@
 
 ![top banner](https://cdn.modrinth.com/data/cached_images/2e55d1fc8ca262e3507c72cc66534eb0d342272d.png)
 
-
-A client-sided Fabric/Forge mod to improve the minecraft server tab list by showing the ping value and TPS which is useful to observe server performance without the use of server-sided mods. Also adds addtional improvements to the tab list. Now highly customizable with configs!
-
-To open config for the mod, use the command /bettertab or by using Mod Menu for Fabric or the built in (neo)Forge config menu.
+Client-side Fabric/(Neo)Forge mod improving the tab list with TPS & ping display, scrolling, and other configurable tweaks. Works on any server without server-side mods.
 
 ## Features
 
-- **Default ping icon is replaced with a numerical one**
+- **Numerical ping**
+- **Scrollable player list**
+- **Customise amount of rows and columns visible**
 - **Enables the use of tablist in singleplayer worlds**
 - **Readds player heads beside player names in offline servers, just like how it works in online servers**
-- **Fully customizable config**
-- **Colored TPS and Ping is shown in the tablist (see below)**
-
-![PING](https://cdn.modrinth.com/data/cached_images/11b3ab026cc260d51c7f75abe77900bf336a7cd8.png)
+- **Colored TPS and Ping shown in footer**
 
 
 
-_note: this mod is a client-sided mod and thus requires the use of packets to estimate tps, which can be unreliable if the server messes with certain packets, but it should generally be accurate enough for vanilla servers. bad connection could also result in the inaccurate estimation of tps_
+## Showcase
+
+
+![Tab Showcase](https://github.com/tricube3/better-tab/blob/stonecutter/tabshowcase%20(1).gif?raw=true)
+
+Scrollable tab with 2 columns and 10 rows.
+By default, vanilla has max of 4 columns and 20 rows.
 
 ## Config
-![Replace this with a description](https://cdn.modrinth.com/data/cached_images/659e7e80256d381ab4ce10fcc7c834e9b6ea731d_0.webp)
+To access configs, use the command /bettertab or by using Mod Menu for Fabric or the built in (neo)Forge config menu.
+
+![config](https://cdn.modrinth.com/data/cached_images/bf53383c9761669c7d612281506ac79a30799dd2_0.webp)
+
+
+
+_note: In servers, TPS is estimated from client-side packets. Accuracy may vary on servers that modify packets or on poor connections._
+
 
 ## Dependencies (For versions >= 2.0.0)
 
