@@ -4,7 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundSetTimePacket;
 import net.minecraft.server.MinecraftServer;
-import net.tricube.better_tab.TPSvalue;
+import net.tricube.better_tab.InfoData;
+import net.tricube.better_tab.config.Config;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 @Mixin(ClientPacketListener.class)
 public class TabTpsMixin {
 
-    private final float[] tpsSamples = new float[20];
+    private final float[] tpsSamples = new float[10];
     private int sampleIndex = 0;
     private long lastPacketTime = -1;
     private long gameJoinedTime;
@@ -35,20 +36,23 @@ public class TabTpsMixin {
         if (isSingleplayer) {
             updateFromServer(mc.getSingleplayerServer());
         } else {
+			if (System.currentTimeMillis() - gameJoinedTime < 1000) {
+				return;
+			}
             updateFromPacket(now);
         }
     }
 
-    private void updateFromServer(MinecraftServer server) {
+    private void updateFromServer(MinecraftServer server) { //todo: get tps natively instead of calculating via mspt
 		//~ if >=1.21 '.getAverageTickTime()' -> '.getCurrentSmoothedTickTime()'
         float mspt = server.getCurrentSmoothedTickTime();
         if (mspt > 0 && mspt < 1000) {
             serverMspt = mspt;
             float tps = 1000.0f / mspt;
-            TPSvalue.setCurrentTPS(Math.min(20.0f, tps));
-            TPSvalue.setCurrentMSPT(mspt);
+			storeTPS(Math.min(tps,20.0f),true);
+            InfoData.setCurrentMSPT(mspt);
         }
-    }
+    }//should implement native way of getting tps
 
     private void updateFromPacket(long now) {
         if (lastPacketTime == -1) {
@@ -64,7 +68,7 @@ public class TabTpsMixin {
             double totalInterval = interval + accumulatedInterval;
             double tps = 20000.0 / totalInterval;
 
-            tps = Math.min(20.0, Math.max(0, tps));
+			tps = Math.max(0, tps);
 
             tpsSamples[sampleIndex] = (float) tps;
             sampleIndex = (sampleIndex + 1) % tpsSamples.length;
@@ -82,19 +86,14 @@ public class TabTpsMixin {
         Minecraft mc = Minecraft.getInstance();
 
         if (mc.player == null) {
-            TPSvalue.setCurrentTPS(20.0f);
+			InfoData.setTpsSuffix("?");
+            InfoData.setCurrentTPS(0.0f);
             return;
         }
 
-        if (System.currentTimeMillis() - gameJoinedTime < 4000) {
-            TPSvalue.setCurrentTPS(20.0f);
-            return;
-        }
-
-        if (serverMspt != -1) {
-            float tps = 1000.0f / serverMspt;
-            TPSvalue.setCurrentTPS(Math.min(20.0f, tps));
-            TPSvalue.setCurrentMSPT(serverMspt);
+        if (System.currentTimeMillis() - gameJoinedTime < 5000) {
+			InfoData.setTpsSuffix("?");
+            InfoData.setCurrentTPS(0.0f);
             return;
         }
 
@@ -102,22 +101,22 @@ public class TabTpsMixin {
         float sumTps = 0;
 
         for (float tps : tpsSamples) {
-            if (tps > 0 && tps <= 20) {
+            if (tps > 0) {
                 sumTps += tps;
                 validSamples++;
             }
         }
 
         if (validSamples < 5) {
-            TPSvalue.setCurrentTPS(20.0f);
+            InfoData.setCurrentTPS(0.0f);
             return;
         }
 
         float avgTps = sumTps / validSamples;
         float avgMspt = 1000.0f / avgTps;
 
-        TPSvalue.setCurrentTPS(avgTps);
-        TPSvalue.setCurrentMSPT(avgMspt);
+		storeTPS(avgTps,false);
+        InfoData.setCurrentMSPT(avgMspt);
     }
 
     @Inject(method = "handleLogin", at = @At("HEAD"))
@@ -132,5 +131,24 @@ public class TabTpsMixin {
         lastPacketTime = -1;
         accumulatedInterval = 0;
         gameJoinedTime = System.currentTimeMillis();
+		InfoData.setCurrentTPS(0.0f);
+		InfoData.setTpsSuffix("?");
     }
+
+	private void storeTPS(float tps,boolean singleplayer){
+		if(tps>20.0f){
+			InfoData.setTpsSuffix("*");
+		} else{
+			InfoData.setTpsSuffix("");
+		}
+		if(!singleplayer && Config.bypassLimit.get()){
+			InfoData.setCurrentTPS(tps);
+			InfoData.setTpsSuffix("");
+		}else{
+			InfoData.setCurrentTPS(Math.min(20.0f, tps));
+		}
+		if(singleplayer){ //dont account for extra tps since tps is calculated via mspt, resulting in >20 tps
+			InfoData.setTpsSuffix("");
+		}
+	}
 }

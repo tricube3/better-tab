@@ -66,6 +66,14 @@ public class Config {
             ConfigOption.colorOption(Component.literal("≤10 TPS"), new Color(0xAA0000))
                     .description(Component.literal("≤10 TPS"));
 
+	public static final ConfigOption<Color> na =
+			ConfigOption.colorOption(Component.literal("N/A"), new Color(0x555555))
+					.description(Component.literal("TPS not available"));
+
+	public static final ConfigOption<Boolean> bypassLimit =
+			ConfigOption.booleanOption(Component.literal("Bypass TPS Limit"), false)
+					.description(Component.literal("Bypass 20 TPS display limit.\nOnly works for servers currently."));
+
     public static final ConfigOption<Color> zero =
             ConfigOption.colorOption(Component.literal("N/A"), new Color(0x555555))
                     .description(Component.literal("0ms"));
@@ -109,17 +117,21 @@ public class Config {
 							.option(footerInfoFormat.controller(new InputFieldController<>()))
 							.build())
 					.build())
-            .category(ConfigCategory.builder(Component.literal("TPS Color"))
+            .category(ConfigCategory.builder(Component.literal("TPS"))
                     .section(ConfigSection.builder(Component.literal("TPS Thresholds"))
                             .option(above19.controller(new ColorController()))
                             .option(above18.controller(new ColorController()))
                             .option(above16.controller(new ColorController()))
                             .option(above10.controller(new ColorController()))
                             .option(below10.controller(new ColorController()))
+							.option(na.controller(new ColorController()))
                             .build())
+					.section(ConfigSection.builder(Component.literal("Formatting"))
+							.option(bypassLimit.controller(new BooleanController()))
+							.build())
                     .build())
 
-            .category(ConfigCategory.builder(Component.literal("Ping Color"))
+            .category(ConfigCategory.builder(Component.literal("Ping"))
                     .section(ConfigSection.builder(Component.literal("Ping Thresholds"))
                             .option(zero.controller(new ColorController()))
                             .option(below100.controller(new ColorController()))

@@ -4,13 +4,16 @@ import net.minecraft.client.Minecraft;
 //~ if >=26.1 '.GuiGraphics' -> '.GuiGraphicsExtractor'
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlayerTabOverlay;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.protocol.ping.ServerboundPingRequestPacket;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Util;
 import net.minecraft.world.scores.Objective;
 import net.minecraft.world.scores.Scoreboard;
-import net.tricube.better_tab.TPSvalue;
+import net.tricube.better_tab.InfoData;import net.tricube.better_tab.Placeholder;
 import net.tricube.better_tab.config.Config;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -18,10 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.awt.*;
 
 @Mixin(PlayerTabOverlay.class)
 public class TabMixin {
@@ -67,64 +67,10 @@ public class TabMixin {
 			originalText = null;
 		}
 		if (minecraft.player == null || minecraft.getConnection() == null) return;
-
-		PlayerInfo info = minecraft.getConnection().getPlayerInfo(minecraft.player.getUUID());
-
-		int ping = info != null ? info.getLatency() : 0;
-		double tps = TPSvalue.getCurrentTPS();
-		int fps = minecraft.getFps();
-		double mspt = TPSvalue.getCurrentMSPT();
-
-		Color tpsColor;
-		Color pingColor;
-		if (ping < 100) pingColor = Config.below100.get();
-		else if (ping < 200) pingColor = Config.below200.get();
-		else if (ping < 300) pingColor = Config.below300.get();
-		else if (ping < 500) pingColor = Config.below500.get();
-		else {
-			ping = Math.min(ping, 999);
-			pingColor = Config.above500.get();
-		}
-
-		if (tps > 19) tpsColor = Config.above19.get();
-		else if (tps > 18) tpsColor = Config.above18.get();
-		else if (tps > 16) tpsColor = Config.above16.get();
-		else if (tps > 10) tpsColor = Config.above10.get();
-		else tpsColor = Config.below10.get();
-
-		final Color finalPingColor = pingColor;
-		final int finalPing = ping;
-
-		MutableComponent tpsComponent = Component.literal(String.format("%.1f", tps))
-				.withStyle(s -> s.withColor(tpsColor.getRGB()));
-
-		MutableComponent pingComponent;
-		if (ping == 0) {
-			pingComponent = Component.literal("?")
-					.withStyle(s -> s.withColor(Config.zero.get().getRGB()));
-		} else {
-			pingComponent = Component.literal(String.valueOf(finalPing))
-					.withStyle(s -> s.withColor(finalPingColor.getRGB()));
-		}
-
-		MutableComponent msptComponent = Component.literal(String.format("%.1f", mspt * 2));
-		MutableComponent fpsComponent = Component.literal(String.valueOf(fps));
-
+		ClientPacketListener connection = Minecraft.getInstance().getConnection();
+		if (connection != null) {connection.send(new ServerboundPingRequestPacket(Util.getMillis()));}
 		String format = Config.footerInfoFormat.get();
-		String[] tokens = format.split("((?=\\{)|(?<=\\}))");
-
-		MutableComponent infoLine = Component.empty();
-		for (String token : tokens) { //TODO: migrate to text placeholder api in future
-			switch (token) {
-				case "{tps}" -> infoLine.append(tpsComponent);
-				case "{ping}" -> infoLine.append(pingComponent);
-				case "{mspt}" -> infoLine.append(msptComponent);
-				case "{fps}" -> infoLine.append(fpsComponent);
-				case "{online}" -> infoLine.append(Component.literal(String.valueOf(minecraft.getConnection() != null ? minecraft.getConnection().getListedOnlinePlayers().size() : 0)));
-				default -> infoLine.append(Component.literal(token.replace("&", "§")));
-			}
-		}
-
+		MutableComponent infoLine = Placeholder.formatted(format, InfoData.getCurrentPing());
 		MutableComponent footerText;
 		if (this.footer != null) {
 			footerText = this.footer.copy();
@@ -169,43 +115,10 @@ public class TabMixin {
 		if (!Config.enableNumericalPing.get()) {
 			return;
 		}
-		int ping = player.getLatency();
-		Color pingColor;
-		if (ping == 0) pingColor = Config.zero.get();
-		else if (ping < 100) pingColor = Config.below100.get();
-		else if (ping < 200) pingColor = Config.below200.get();
-		else if (ping < 300) pingColor = Config.below300.get();
-		else if (ping < 500) pingColor = Config.below500.get();
-		else {
-			ping = Math.min(ping, 999);
-			pingColor = Config.above500.get();
-		}
-
 		float scale = Config.scale.get();
-		MutableComponent displayComponent;
-		String formatString = Config.numericalFormat.get();
-		String pingFormat;
-		if (ping != 0) {
-			pingFormat = String.valueOf(ping);
-		} else {
-			pingFormat = "?";
-		}
-
-		MutableComponent pingComponent = Component.literal(pingFormat)
-				.withStyle(style -> style.withColor(pingColor.getRGB()));
-
-		String[] parts = formatString.split("\\{ping\\}", -1);
-		displayComponent = Component.empty();
-
-		for (int i = 0; i < parts.length; i++) {
-			if (!parts[i].isEmpty()) {
-				displayComponent.append(Component.literal(parts[i].replace("&", "§")));
-			}
-			if (i < parts.length - 1) {
-				displayComponent.append(pingComponent);
-			}
-		}
-
+		int ping = player.getLatency();
+		String format = Config.numericalFormat.get();
+		MutableComponent displayComponent = Placeholder.formatted(format,ping);
 		FormattedCharSequence text = displayComponent.getVisualOrderText();
 
 		int textWidth = minecraft.font.width(text);

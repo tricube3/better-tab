@@ -1,2 +1,1 @@
-added scroll function to tablist
-added {online} player placeholder
+improved ping & tps tracking
